@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-product</title>
+    <link rel="stylesheet" href="/static/add-product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+</head>
+<body>
+    <div class="back">
+        <a href="./Home.html">
+            <i class="ri-arrow-left-s-fill"></i> <span>Back to product list</span>
+        </a>
+    </div>
+    <div class="form-container">
+        <div class="sidebar">
+            <div class="step step-1 active-step">
+                <div class="icon-step"><i class="ri-info-card-line"></i></div>
+                <div class="heading-step">
+                    <div class="title">STEP 1</div>
+                    <p>General Information</p>
+                </div>
+            </div>
+            <div class="step step-2">
+                <div class="icon-step"><i class="ri-price-tag-3-fill"></i></div>
+                <div class="heading-step">
+                    <div class="title">STEP 2</div>
+                    <p>Quantity & Prices</p>
+                </div>
+            </div>
+            <div class="step step-3">
+                <div class="icon-step"><i class="ri-image-fill"></i></div>
+                <div class="heading-step">
+                    <div class="title">STEP 3</div>
+                    <p>Images</p>
+                </div>
+            </div>
+        </div>
+        <form method="post" action="/submit-product">
+            <!-- step 1 -->
+            <div class="step-form step-form-1 active">
+                <label> Product name: <input type="text" name="name" required></label>
+                <label> Product ID: <input type="text" name="id" required></label>
+                <label> Product Type:
+                    <select name="type" required>
+                        <option value="fashion">Fashion</option>
+                        <option value="fashion">food</option>
+                        <option value="fashion">book</option>
+                    </select>
+                </label>
+            </div>
+            <!-- step 2 -->
+            <div class="step-form step-form-2">
+                <label>Quantity: <input type="number" name="Quantity" required></label>
+                <label>Price Min: <input type="number" name="Prices_min" required></label>
+                <label>Price Max: <input type="number" name="Prices_max" required></label>
+                <h4>Lưu ý: Giá tiền ở đấy là cho 1 sản phẩm không phải cho tất cả quantity</h4>
+            </div>
+            <!-- step 3 -->
+            <div class="step-form step-form-3">
+                <label>Product Image: <input type="text" name="img" required></label>
+            </div>
+        </form>
+        <div class="nav-buttons">
+            <button type="button" class="back-btn" onclick="prevStep()">Back</button>
+            <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+        </div>
+    </div>
+</body>
+</html>

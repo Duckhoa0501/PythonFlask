@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý nhà kho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <link rel="stylesheet" href="/static/Home.css">
+</head>
+<body>
+
+    <!-- ======================= navbar =======================-->
+    <header class="container">
+        <div class="navbar">
+            <div class="logo-home">
+                <img src="/static/image/logo-home.png" alt="logo-warehouse">
+                <h3>inventor warehouse</h3>
+            </div>
+            <div class="nav-feature">
+                <ul class="list-warehouse">
+                    <li class="item-warehouse active"><i class="ri-function-line"></i> Inventory</li>
+                    <li class="item-warehouse"><i class="ri-user-6-fill"></i> User</li>
+                    <li class="item-warehouse"><i class="ri-file-list-line"></i> Order</li>
+                    <li class="item-warehouse"><i class="ri-folder-2-line"></i> Document</li>
+                </ul>
+            </div>
+            <div class="log-out">
+                <button class="btn-logout"><i class="ri-logout-circle-r-line"></i></button>
+            </div>
+        </div>
+    </header>
+    <!-- ======================= Main =======================-->
+    <main class="container">
+        <div class="filter-panel">
+            <div class="filter-total">
+                <h2>Product</h2>
+                <p><span>{{ total_quantity }}</span> total products</p>
+            </div>
+            <div class="filter-box">
+                <!-- ======================= Category =======================-->
+                <div class="filter-category filter-group">
+                    <label class="filter-title">PRODUCT CATEGORY</label>
+                    <div class="filter-option">
+                        <a href="{{ url_for('home', type='all', sort=sort_option) }}" 
+                        class="filter-btn {% if type_filter == 'all' %}filter-active{% endif %}">
+                        All <span>{{ total_quantity }}</span>
+                        </a>
+                        <a href="{{ url_for('home', type='fashion', sort=sort_option) }}" 
+                        class="filter-btn {% if type_filter == 'fashion' %}filter-active{% endif %}">
+                        Fashion <span>{{ type_counts.get('Fashion', 0) }}</span>
+                        </a>
+                        <a href="{{ url_for('home', type='food', sort=sort_option) }}" 
+                        class="filter-btn {% if type_filter == 'food' %}filter-active{% endif %}">
+                        Food <span>{{ type_counts.get('food', 0) }}</span>
+                        </a>
+                        <a href="{{ url_for('home', type='book', sort=sort_option) }}" 
+                        class="filter-btn {% if type_filter == 'book' %}filter-active{% endif %}">
+                        Book <span>{{ type_counts.get('book', 0) }}</span>
+                        </a>
+                    
+                    </div>
+                </div>
+                <!-- ======================= Sort by =======================-->
+                <div class="filter-sort filter-group">
+                    <label class="filter-title">SORT BY</label>
+                    <form method="get" action="/home" id="sort-form">
+                        <div class="select-wrapper">
+                            <select name="sort" id="sort-select" onchange="document.getElementById('sort-form').submit();">
+                                <option value="az" {% if sort_option == 'az' %}selected{% endif %}>A-Z</option>
+                                <option value="za" {% if sort_option == 'za' %}selected{% endif %}>Z-A</option>
+                            </select>
+
+                            <!-- custom hiển thị -->
+                            <div class="custom-select" onclick="document.getElementById('sort-select').focus();">
+                                <i class="ri-expand-up-down-fill"></i>
+                                <span class="label">Alphabetical:</span>
+                                <span class="value">
+                                    {% if sort_option == "az" %}A-Z{% elif sort_option == "za" %}Z-A{% else %}A-Z{% endif %}
+                                </span>
+                                <i class="ri-arrow-drop-down-fill"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- ======================= Prices =======================-->
+                <div class="filter-prices filter-group">
+                    <label class="filter-title">PRICES</label>
+                    <div class="price-input-group">
+                        <div class="price-input">
+                            <span class="price-icon">$</span>
+                            <input type="number" placeholder="Minimum price">
+                        </div>
+                            <div class="price-input">
+                                <span class="price-icon">$</span>
+                                <input type="number" placeholder="Maximum price">
+                            </div>
+                    </div>
+                </div>
+                <!-- ======================= Reset filter =======================-->
+                <div class="filter-reset"></div>
+            </div>
+        </div>
+        <div class="product">
+            <div class="feature">
+                <div class="container-feature">
+                    <!-- ======================= Search Product =======================-->
+                    <div class="search-feature">
+                        <form class="search-form" method="get" action="{{ url_for('home')}}">
+                            <input type="hidden" name="sort" value="{{ sort_option}}">
+                            <input type="hidden" name="type" value="{{ request.args.get('type', 'all') }}">
+
+                            <button class="icon-search"><i class="ri-search-eye-line"></i></button>
+                            <input type="text" name="query" placeholder="Search product.... Name or ID" value="{{ search_query or ''}}">
+                            <i class="ri-qr-scan-2-line"></i>
+                        </form>
+                    </div>
+                    <!-- ======================= Tính năng đổi góc nhìn của product =======================-->
+                    <div class="btn-feature">
+                        <div class="mix-btn">
+                            <div class="btn-1  btn-active"><i class="ri-list-unordered"></i></div>
+                            <div class="btn-2 "><i class="ri-function-fill"></i></div>
+                        </div>
+                    </div>
+                    <!-- ======================= Thêm sản phẩm vô warehouse =======================-->
+                    <div class="add-product">
+                        <a href="./add-product.html">
+                            <button class="button-add-product" id="add-product">Add Product</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="list-product">
+                {% if products %}
+                {% for product in products %}
+                <div class="product-card">
+                    <div class="product-infor">
+                        <img src="{{product.img}}" alt="Ảnh sản phẩm" class="product-img">
+                        <div class="product-details">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <div class="product-tag">
+                                <span class="tag tag-id">ID: {{ product.id }}</span>
+                                <span class="tag">Type: {{ product.type }}</span>
+                                <span class="tag tag-quantity">Quantity: {{ product.Quantity }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-prices-block">
+                        <span class="prices-title">Mức giá</span>
+                        <span class="prices-money">
+                            {{ product.Prices[0] }} - {{ product.Prices[1] }}
+                        </span>
+                    </div>
+                    <div class="product-action">
+                        <button class="action-btn"><i class="ri-more-fill"></i></button>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="no-product-message">
+                    <p>Không tìm thấy sản phẩm nào có tên hay mã ID như vậy</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</body>
+</html>

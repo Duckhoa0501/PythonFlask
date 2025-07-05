@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='warehouse.css') }}">
+</head>
+<body>
+    <div class="box">
+        <div class="inner-box-1">
+            <img src="{{ url_for('static', filename='image/user-img-background.png') }}" alt="" class="img-inner-box-1">
+            <h3>Người Trải Nghiệm</h3>
+            <p>Ấn vô nút phía bên dưới để đi đến kho</p>
+        </div>
+        <div class="inner-box-2">
+            <form method="post">
+                <button class="buttom-inner" type="submit"> Next <i class="ri-arrow-right-circle-line"></i> </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

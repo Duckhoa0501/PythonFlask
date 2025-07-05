@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&family=Miniver&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,300;1,400&family=Righteous&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input, button{
+    border: none;
+    outline: none;
+}
+
+ul {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+body {
+    overflow: hidden;
+    font-family: "poppins", sans-serif;
+    background-color: var(--background-color);
+}
+
+:root {
+    --background-color: #0e2023;
+    --sider-nav: #1A262D;
+    --filter-color: #283943;
+    --btn-color: #0d454d;
+    --button-color: #39db7d;
+    --text-color: #5f6d6f;
+    --white-color: #ffffff;
+}
+/* ====================================== Back ======================================*/
+
+.back {
+    padding: 10px 10px ;
+}
+
+.back a {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    transition: 0.3s all ease-in-out;
+}
+
+.back i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.back a:hover {
+    color: var(--white-color);
+    transition: 0.3s all ease-in-out;
+}
+
+/* ====================================== Form container ======================================*/
+.form-container {
+    display: flex;
+    margin: 20px;
+    gap: 20px;
+}
+
+/* ====================================== Sidebar ======================================*/
+.form-container .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.sidebar .step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text-color);
+    padding: 10px 25px;
+}
+
+.sidebar .heading-step {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .heading-step .title {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.sidebar .heading-step p {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white-color);
+}
+
+.sidebar .step .icon-step {
+    font-size: 20px;
+}
+
+.sidebar .active-step {
+    background-color: #18262f;
+    padding: 10px 25px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar .active-step .icon-step {
+    color: var(--button-color);
+    font-size: 20px;
+}
+
+.sidebar .active-step .heading-step p {
+    color: var(--button-color);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.step.active-step::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 8px;
+    width: 5px;
+    border-radius: 4px;
+    background-color: var(--button-color);
+}
+
+/* ====================================== Step form ======================================*/
+.step-form {
+    background-color: #18262f;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    padding: 15px;
+    color: var(--white-color);
+    margin-bottom: 3px;
+    width: 200%;
+    margin-left: 100px;
+    height: auto;
+}
+
+.step-form.active {
+    display: flex;
+}
+
+.step-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 5px;
+    margin-bottom: 15px;
+    color: var(--white-color);
+}
+
+.step-form input:hover {
+    border: 1px solid var(--button-color);
+        transition: all 0.3s ease-out;
+}
+
+.step-form input,
+.step-form select {
+    padding: 10px;
+    background-color: #18262f;
+    border: 1px solid var(--filter-color);
+    border-radius: 8px;
+    color: var(--white-color);
+    transition: all 0.3s ease-out;
+}
+
+
+/* ====================================== Back next ======================================*/
+.nav-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 28px;
+    background-color: #18262f;
+    border-top: 1px solid var(--btn-color);
+    z-index: 10;
+    border-bottom-left-radius: 10px;
+}
+
+.back-btn, .next-btn {
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 550;
+    cursor: pointer;
+    padding: 15px 30px;
+    width: 130px;
+    transition: background-color 0.3s ease;
+    background: none;
+    margin-bottom: 10px;
+}
+
+.back-btn {
+    border: 2px solid #c2c2c2;
+    color: #c2c2c2;
+    transition: all 0.3s ease-in-out;
+}
+
+.back-btn:hover {
+    background-color: #c2c2c2;
+    color: #18262f;
+    transition: all 0.3s ease-in-out;
+}
+
+.next-btn {
+    background-color: #c2c2c2;
+    color: #18262f;
+    transition: all 0.3s ease-in-out;
+}
+
+.next-btn:hover {
+    border: 2px solid #c2c2c2;
+    color: #c2c2c2;
+    background-color: #18262f;
+    transition: all 0.3s ease-in-out;
+}
