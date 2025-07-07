@@ -62,9 +62,48 @@ def home():
                            search_query = search_query
                            )
 
-# @app.route("/add-product", methods = ["GET", "POST"])
-# def add_product():
+@app.route("/add", methods=["GET", "POST"])
+def add_product():
+    if request.method == "POST":
+        new_product = {
+            "id": get_next_id(),
+            "name": request.form["name"],
+            "type": request.form["type"],
+            "Quantity": int(request.form["quantity"]),
+            "Prices": [
+                float(request.form["price_min"]),
+                float(request.form["price_max"])
+            ],
+            "img": request.form["img"]
+        }
 
+        data = load_product()
+        data.append(new_product)
+
+        with open('data.json', 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+
+        return redirect(url_for("home"))
+    
+    return render_template("add_product.html")
+
+
+def get_next_id():
+    data = load_product()
+    if not data:
+        return 1
+    return max(p["id"] for p in data) + 1
+
+
+@app.route("/delete/<int:product_id>", methods=["POST"])
+def delete_product(product_id):
+    data = load_product()
+    data = [p for p in data if p["id"] != product_id]
+
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.run(debug=True)

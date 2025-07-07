@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+</head>
+<body>
+    <h2>Thêm sản phẩm mới</h2>
+    <form method="POST" action="/add" enctype="multipart/form-data">
+        <label>Tên sản phẩm:</label><br>
+        <input type="text" name="name"><br>
+        
+        <label>Loại sản phẩm:</label><br>
+        <input type="text" name="type"><br>
+        
+        <label>Số lượng:</label><br>
+        <input type="number" name="quantity"><br>
+        
+        <label>Giá thấp nhất:</label><br>
+        <input type="number" name="price_min" step="0.01"><br>
+
+        <label>Giá cao nhất:</label><br>
+        <input type="number" name="price_max" step="0.01"><br>
+
+        <label>URL hình ảnh:</label><br>
+        <input type="text" name="img"><br><br>
+
+        <button type="submit">Thêm sản phẩm</button>
+    </form>
+</body>
+</html>

@@ -88,11 +88,11 @@
                     <div class="price-input-group">
                         <div class="price-input">
                             <span class="price-icon">$</span>
-                            <input type="number" placeholder="Minimum price">
+                            <input type="number" placeholder="Minimum price" name="min_price" value="{{ request.args.get('min_price', '') }}">
                         </div>
                             <div class="price-input">
                                 <span class="price-icon">$</span>
-                                <input type="number" placeholder="Maximum price">
+                                <input type="number" placeholder="Maximum price" name="max_price" value="{{ request.args.get('max_price', '') }}">
                             </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                     </div>
                     <!-- ======================= Thêm sản phẩm vô warehouse =======================-->
                     <div class="add-product">
-                        <a href="./add-product.html">
+                        <a href="{{ url_for('add_product') }}">
                             <button class="button-add-product" id="add-product">Add Product</button>
                         </a>
                     </div>
@@ -152,6 +152,11 @@
                     </div>
                     <div class="product-action">
                         <button class="action-btn"><i class="ri-more-fill"></i></button>
+                        <form method="POST" action="{{ url_for('delete_product', product_id=product.id) }}">
+                            <button class="action-btn" onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này?')">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 {% endfor %}
